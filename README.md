@@ -9,7 +9,7 @@ version: '2'
 services:
 
   sshtunnel:
-    image: sshtunnel
+    image: nowsci/sshtunnel
     container_name: sshtunnel
     ports:
       - "25:2525"
