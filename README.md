@@ -38,6 +38,7 @@ services:
     volumes:
       - ./sshtunnel/data/:/data/:ro
     environment:
+      - REMOTE=true
       - TUNNEL_HOST=host.example.com
       - TUNNEL_PORT=22
       - CONTAINER_HOST=nginx
