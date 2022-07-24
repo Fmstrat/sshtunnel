@@ -22,6 +22,7 @@ services:
       - LOCAL_PORT=2525
       - REMOTE_PORT=25
       - KEY=/data/keyfile
+      - USER=root
     restart: always
 ```
 
@@ -45,5 +46,6 @@ services:
       - CONTAINER_PORT=80
       - REMOTE_PORT=8080
       - KEY=/data/keyfile
+      - USER=root
     restart: always
 ```
