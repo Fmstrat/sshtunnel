@@ -45,5 +45,7 @@ services:
       - CONTAINER_PORT=80
       - REMOTE_PORT=8080
       - KEY=/data/keyfile
+      # Optional
+      # - LISTEN_HOST=0.0.0.0
     restart: always
 ```
