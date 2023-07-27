@@ -1,9 +1,9 @@
-FROM alpine:3.17
+FROM alpine:3.18
 MAINTAINER NOSPAM <nospam@nnn.nnn>
 
 COPY init.sh /init.sh
 
-RUN apk add --update openssh-client && rm -rf /var/cache/apk/*; \
+RUN apk add --update bash openssh-client && rm -rf /var/cache/apk/*; \
     chmod +x /init.sh
 
 CMD /init.sh
