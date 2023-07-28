@@ -22,6 +22,7 @@ services:
       - LOCAL_PORT=2525
       - REMOTE_PORT=25
       - KEY=/data/keyfile
+      - VERBOSE=true
     restart: always
 ```
 
@@ -46,6 +47,7 @@ services:
       - LOCAL_PORT=2525,2526
       - REMOTE_PORT=25,26
       - KEY=/data/keyfile
+      - VERBOSE=true
     restart: always
 ```
 
@@ -71,6 +73,7 @@ services:
       - KEY=/data/keyfile
       # Optional
       # - LISTEN_HOST=0.0.0.0
+      - VERBOSE=true
     restart: always
 ```
 
@@ -96,5 +99,6 @@ services:
       - KEY=/data/keyfile
       # Optional
       # - LISTEN_HOST=0.0.0.0
+      - VERBOSE=true
     restart: always
 ```

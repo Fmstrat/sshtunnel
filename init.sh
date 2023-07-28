@@ -1,5 +1,10 @@
 #!/bin/bash
 
+V=""
+if [ "${VERBOSE}" = "true" ]; then
+	V='-vv'
+fi
+
 if [ "$REMOTE" != "true" ]; then
 	IFS=',' read -r -a REMOTE_HOST_ARRAY <<< "$REMOTE_HOST"
 	IFS=',' read -r -a LOCAL_PORT_ARRAY <<< "$LOCAL_PORT"
@@ -9,7 +14,7 @@ if [ "$REMOTE" != "true" ]; then
 		FORWARDING+=" -L *:${LOCAL_PORT_ARRAY[$I]}:${REMOTE_HOST_ARRAY[$I]}:${REMOTE_PORT_ARRAY[$I]}"
 	done
 	ssh \
-		-vv \
+		${V} \
 		-o StrictHostKeyChecking=no \
 		-Nn $TUNNEL_HOST \
 		-p $TUNNEL_PORT \
@@ -28,7 +33,7 @@ else
 		FORWARDING+=" -R ${LOCAL_HOST}:${REMOTE_PORT_ARRAY[$I]}:${CONTAINER_HOST_ARRAY[$I]}:${CONTAINER_PORT_ARRAY[$I]}"
 	done
 	ssh \
-		-vv \
+		${V} \
 		-o StrictHostKeyChecking=no \
 		-Nn $TUNNEL_HOST \
 		-p $TUNNEL_PORT \
