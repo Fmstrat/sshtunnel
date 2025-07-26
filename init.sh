@@ -13,13 +13,19 @@ if [ "$REMOTE" != "true" ]; then
 	for I in ${!REMOTE_HOST_ARRAY[*]}; do
 		FORWARDING+=" -L *:${LOCAL_PORT_ARRAY[$I]}:${REMOTE_HOST_ARRAY[$I]}:${REMOTE_PORT_ARRAY[$I]}"
 	done
-	ssh \
-		${V} \
-		-o StrictHostKeyChecking=no \
-		-Nn $TUNNEL_HOST \
-		-p $TUNNEL_PORT \
-		${FORWARDING} \
-		-i $KEY
+	while [ true ]; do
+		echo "Connecting to ${TUNNEL_HOST}:${TUNNEL_PORT}"
+		ssh \
+			${V} \
+			-o StrictHostKeyChecking=no \
+			-o ServerAliveInterval=15 \
+			-o ServerAliveCountMax=4 \
+			-Nn ${TUNNEL_HOST} \
+			-p ${TUNNEL_PORT} \
+			${FORWARDING} \
+			-i ${KEY}
+		sleep 60;
+	done
 else
 	LOCAL_HOST="0.0.0.0"
 	if [ -n "$LISTEN_HOST" ]; then
@@ -32,11 +38,17 @@ else
 	for I in ${!CONTAINER_HOST_ARRAY[*]}; do
 		FORWARDING+=" -R ${LOCAL_HOST}:${REMOTE_PORT_ARRAY[$I]}:${CONTAINER_HOST_ARRAY[$I]}:${CONTAINER_PORT_ARRAY[$I]}"
 	done
-	ssh \
-		${V} \
-		-o StrictHostKeyChecking=no \
-		-Nn $TUNNEL_HOST \
-		-p $TUNNEL_PORT \
-		${FORWARDING} \
-		-i $KEY
+	while [ true ]; do
+		echo "Connecting to ${TUNNEL_HOST}:${TUNNEL_PORT}"
+		ssh \
+			${V} \
+			-o StrictHostKeyChecking=no \
+			-o ServerAliveInterval=15 \
+			-o ServerAliveCountMax=4 \
+			-Nn ${TUNNEL_HOST} \
+			-p ${TUNNEL_PORT} \
+			${FORWARDING} \
+			-i ${KEY}
+		sleep 60;
+	done
 fi
