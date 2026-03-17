@@ -20,6 +20,7 @@ if [ "$REMOTE" != "true" ]; then
 			-o StrictHostKeyChecking=no \
 			-o ServerAliveInterval=15 \
 			-o ServerAliveCountMax=4 \
+			-o ExitOnForwardFailure=yes \
 			-Nn ${TUNNEL_HOST} \
 			-p ${TUNNEL_PORT} \
 			${FORWARDING} \
@@ -45,6 +46,7 @@ else
 			-o StrictHostKeyChecking=no \
 			-o ServerAliveInterval=15 \
 			-o ServerAliveCountMax=4 \
+			-o ExitOnForwardFailure=yes \
 			-Nn ${TUNNEL_HOST} \
 			-p ${TUNNEL_PORT} \
 			${FORWARDING} \
